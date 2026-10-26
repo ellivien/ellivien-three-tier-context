@@ -104,6 +104,9 @@ const snapshot = {
   releases: releaseEvidence,
   releaseAssetDownloadTotal: releaseEvidence.reduce((total, release) =>
     total + release.assets.reduce((releaseTotal, asset) => releaseTotal + asset.downloadCount, 0), 0),
+  releasePackageDownloadTotal: releaseEvidence.reduce((total, release) =>
+    total + release.assets.filter(asset => /\.zip$/i.test(asset.name))
+      .reduce((releaseTotal, asset) => releaseTotal + asset.downloadCount, 0), 0),
 };
 
 const filename = `${capturedAt.replace(/:/g, '-').replace(/\.\d{3}Z$/, 'Z')}.json`;
@@ -125,6 +128,7 @@ if (commitMode) {
     path: result.content?.path || relativePath,
     commitUrl: result.commit?.html_url || null,
     releaseAssetDownloadTotal: snapshot.releaseAssetDownloadTotal,
+    releasePackageDownloadTotal: snapshot.releasePackageDownloadTotal,
   }));
 } else {
   const outputPath = join(ROOT, relativePath);

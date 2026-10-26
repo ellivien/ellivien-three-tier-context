@@ -27,6 +27,8 @@ const FULL_PATTERNS = Object.freeze([
   /\bscan (?:this |the )?(?:whole|entire|full) (?:thread|chat|conversation)\b/i
 ]);
 
+const NEGATED_RECALL_PATTERN = /\b(?:do not|don't|dont|never)\b[^.!?]{0,80}\b(?:search|look|check|scan|recall)\b/i;
+
 function positiveInteger(value, fallback) {
   const number = Number(value);
   return Number.isInteger(number) && number > 0 ? number : fallback;
@@ -55,8 +57,9 @@ function plainText(content) {
 
 function normaliseMessages(messages) {
   return (Array.isArray(messages) ? messages : [])
+    .filter(message => message?.role === 'user' || message?.role === 'assistant')
     .map(message => ({
-      role: message?.role === 'assistant' ? 'assistant' : 'user',
+      role: message.role,
       content: plainText(message?.content).replace(/\s+/g, ' ').trim()
     }))
     .filter(message => message.content);
@@ -64,6 +67,7 @@ function normaliseMessages(messages) {
 
 function selectTier(query, options = {}) {
   const text = String(query || '').trim();
+  if (NEGATED_RECALL_PATTERN.test(text)) return 1;
   const fullPatterns = options.fullPatterns || FULL_PATTERNS;
   const expandedPatterns = options.expandedPatterns || EXPANDED_PATTERNS;
   if (fullPatterns.some(pattern => pattern.test(text))) return 3;
@@ -80,7 +84,9 @@ function transcript(messages, options = {}) {
   ).join('\n');
   const limit = positiveInteger(options.charLimit, output.length || 1);
   if (output.length <= limit) return output;
-  return `[Earlier text omitted to respect the context cap.]\n${output.slice(-limit)}`;
+  const marker = '[Earlier text omitted to respect the context cap.]\n';
+  if (limit <= marker.length) return output.slice(-limit);
+  return `${marker}${output.slice(-(limit - marker.length))}`;
 }
 
 function limitWords(value, maxWords = DEFAULTS.summaryMaxWords) {
@@ -92,7 +98,10 @@ function prepareContext(input = {}) {
   const options = normaliseOptions(input.options);
   const messages = normaliseMessages(input.messages);
   const query = String(input.query || '').trim();
-  const tier = selectTier(query, input.patterns || {});
+  const explicitTier = Number(input.tier);
+  const tier = [1, 2, 3].includes(explicitTier)
+    ? explicitTier
+    : selectTier(query, input.patterns || {});
   const recentStart = Math.max(0, messages.length - options.recentWindow);
   const recentMessages = messages.slice(recentStart);
   let helperTranscript = '';
@@ -180,8 +189,8 @@ function buildSummaryRequest(input = {}) {
   const options = normaliseOptions(input.options);
   const messages = normaliseMessages(input.messages);
   const lastMessageCount = Math.max(0, Number(input.state?.lastMessageCount) || 0);
-  const start = Math.max(lastMessageCount, messages.length - options.summaryBatchSize);
-  const batch = messages.slice(start);
+  const start = Math.min(lastMessageCount, messages.length);
+  const batch = messages.slice(start, start + options.summaryBatchSize);
   if (!batch.length) return null;
   return {
     model: input.model || 'gpt-6-luna',
@@ -208,7 +217,7 @@ function buildSummaryRequest(input = {}) {
       }
     ],
     max_output_tokens: 120,
-    nextMessageCount: messages.length
+    nextMessageCount: start + batch.length
   };
 }
 

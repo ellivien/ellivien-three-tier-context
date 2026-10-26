@@ -31,6 +31,11 @@ loading and saving this state.
 Helper failure should be non-fatal: answer with the recent window and existing
 rolling summary rather than blocking the conversation.
 
+The built-in phrase matching is a convenience, not a consent engine. A negated
+request such as “do not search the whole thread” stays at Tier 1. For a stronger
+privacy boundary, expose a deliberate recall control in the host application and
+pass its decision as `tier: 1`, `2` or `3` to `prepareContext()`.
+
 ## OpenAI example
 
 `examples/openai-helper.cjs` calls the Responses API with a server-held API key.

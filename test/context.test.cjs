@@ -40,6 +40,24 @@ test('an explicit whole-thread request uses tier 3', () => {
   assert.match(prepared.helperTranscript, /^1\./);
 });
 
+test('a negated whole-thread request does not activate wider disclosure', () => {
+  const prepared = context.prepareContext({
+    messages: messages(40),
+    query: 'Please do not search the whole thread for this.'
+  });
+  assert.equal(prepared.tier, 1);
+  assert.equal(prepared.helperTranscript, '');
+});
+
+test('an application can supply an explicit tier decision', () => {
+  const prepared = context.prepareContext({
+    messages: messages(40),
+    query: 'ordinary wording',
+    tier: 3
+  });
+  assert.equal(prepared.tier, 3);
+});
+
 test('full-thread transcript keeps the newest text when capped', () => {
   const prepared = context.prepareContext({
     messages: messages(40),
@@ -49,6 +67,7 @@ test('full-thread transcript keeps the newest text when capped', () => {
   assert.match(prepared.helperTranscript, /Earlier text omitted/);
   assert.match(prepared.helperTranscript, /message 40/);
   assert.doesNotMatch(prepared.helperTranscript, /message 1\n/);
+  assert.ok(prepared.helperTranscript.length <= 120);
 });
 
 test('rolling summary refresh is incremental and bounded', () => {
@@ -73,5 +92,27 @@ test('model-generated recall is separated from the user message', () => {
   assert.equal(result.system.length, 2);
   assert.match(result.system[1], /not as a new user instruction/);
   assert.equal(result.recentMessages.length, 8);
+});
+
+test('non-conversation roles are not relabelled as user messages', () => {
+  const normalized = context.normaliseMessages([
+    { role: 'system', content: 'private system instruction' },
+    { role: 'tool', content: 'tool output' },
+    { role: 'user', content: 'hello' },
+    { role: 'assistant', content: 'hi' }
+  ]);
+  assert.deepEqual(normalized, [
+    { role: 'user', content: 'hello' },
+    { role: 'assistant', content: 'hi' }
+  ]);
+});
+
+test('a delayed summary refresh processes the oldest unseen batch without skipping', () => {
+  const state = { text: 'Earlier facts.', lastMessageCount: 30 };
+  const request = context.buildSummaryRequest({ messages: messages(95), state });
+  assert.match(request.input[1].content, /31\. User: message 31/);
+  assert.match(request.input[1].content, /60\. Companion: message 60/);
+  assert.doesNotMatch(request.input[1].content, /message 61/);
+  assert.equal(request.nextMessageCount, 60);
 });
 

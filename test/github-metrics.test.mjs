@@ -2,9 +2,10 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:http';
 import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
-const ROOT = resolve(import.meta.dirname, '..');
+const ROOT = resolve(fileURLToPath(new URL('.', import.meta.url)), '..');
 
 function runCapture(environment) {
   return new Promise((resolveRun, rejectRun) => {
@@ -77,6 +78,7 @@ test('captures aggregate GitHub evidence and commits one timestamped snapshot', 
   assert.equal(snapshot.traffic.clones.uniques, 4);
   assert.equal(snapshot.repositoryTotals.stars, 7);
   assert.equal(snapshot.releaseAssetDownloadTotal, 9);
+  assert.equal(snapshot.releasePackageDownloadTotal, 9);
   assert.equal(snapshot.source.aggregateOnly, true);
   assert.match(JSON.parse(result.stdout).path, /^metrics\/snapshots\/.*\.json$/);
 });

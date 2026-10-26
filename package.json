@@ -8,7 +8,14 @@
   "files": [
     "src/",
     "examples/",
+    "docs/",
+    "test/",
+    "scripts/build-release.cjs",
+    "scripts/capture-github-metrics.mjs",
     "README.md",
+    "INSTALL-WITH-AI.md",
+    "RELEASE-ACCEPTANCE.md",
+    "CONTRIBUTING.md",
     "SECURITY.md",
     "LICENSE",
     "NOTICE"
@@ -19,6 +26,25 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "keywords": [
+    "ai",
+    "companion",
+    "context",
+    "summarisation",
+    "long-conversation"
+  ],
+  "author": {
+    "name": "Ellivien",
+    "url": "https://github.com/ellivien"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ellivien/ellivien-three-tier-context.git"
+  },
+  "homepage": "https://github.com/ellivien/ellivien-three-tier-context#readme",
+  "bugs": {
+    "url": "https://github.com/ellivien/ellivien-three-tier-context/issues"
   }
 }
 

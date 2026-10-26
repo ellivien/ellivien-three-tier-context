@@ -24,6 +24,10 @@ views, visitors, clones, cloners, referrers and popular-path data. Each snapshot
 also records stars, forks and named release-asset download counts. It contains
 no visitor identities.
 
+Each snapshot keeps per-asset counts and a `releasePackageDownloadTotal` that
+sums only named `.zip` packages. The separate `releaseAssetDownloadTotal`
+includes checksum-file downloads and must not be described as package downloads.
+
 ## Release
 
 After `RELEASE-ACCEPTANCE.md` passes, create and push a tag matching

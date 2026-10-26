@@ -24,11 +24,15 @@ const included = [
   'LICENSE',
   'NOTICE',
   'README.md',
+  'INSTALL-WITH-AI.md',
+  'RELEASE-ACCEPTANCE.md',
   'SECURITY.md',
   'docs',
   'examples',
   'package.json',
+  'scripts',
   'src',
+  'test',
 ];
 
 mkdirSync(releaseDirectory, { recursive: true });

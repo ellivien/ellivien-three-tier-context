@@ -1,12 +1,24 @@
 'use strict';
 
 // Server-side example only. Never send OPENAI_API_KEY to a browser.
+function extractResponseText(data) {
+  if (typeof data?.output_text === 'string') return data.output_text.trim();
+  const parts = (Array.isArray(data?.output) ? data.output : [])
+    .flatMap(item => Array.isArray(item?.content) ? item.content : [])
+    .filter(part => part?.type === 'output_text' && typeof part.text === 'string')
+    .map(part => part.text.trim())
+    .filter(Boolean);
+  return parts.join('\n').trim();
+}
+
 async function runHelper(request, options = {}) {
   const apiKey = options.apiKey || process.env.OPENAI_API_KEY;
   if (!apiKey) throw new Error('OPENAI_API_KEY is required on the server');
   if (!request) return '';
 
-  const response = await fetch('https://api.openai.com/v1/responses', {
+  const fetchImpl = options.fetchImpl || globalThis.fetch;
+  if (typeof fetchImpl !== 'function') throw new Error('A fetch implementation is required');
+  const response = await fetchImpl('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -21,8 +33,8 @@ async function runHelper(request, options = {}) {
 
   const data = await response.json();
   if (!response.ok) throw new Error(data?.error?.message || `OpenAI helper failed (${response.status})`);
-  return String(data.output_text || '').trim();
+  return extractResponseText(data);
 }
 
-module.exports = { runHelper };
+module.exports = { extractResponseText, runHelper };
 

@@ -68,6 +68,10 @@ concatenate helper output into the user's message.
 See [the integration guide](docs/INTEGRATION.md) for the rolling-summary path,
 storage shape and security boundary.
 
+If a coding AI will perform the integration, give it this repository and ask it
+to follow [INSTALL-WITH-AI.md](INSTALL-WITH-AI.md). The guide requires local
+testing, server-side key handling and explicit approval before deployment.
+
 ## Test
 
 ```bash
@@ -90,4 +94,7 @@ The tests use Node's built-in test runner and make no network calls.
 ## Licence
 
 Apache License 2.0. See `LICENSE` and `NOTICE`.
+
+Created by [Ellivien](https://github.com/ellivien). This is the canonical
+repository: [ellivien/ellivien-three-tier-context](https://github.com/ellivien/ellivien-three-tier-context).
 
