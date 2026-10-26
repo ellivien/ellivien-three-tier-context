@@ -17,18 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      CONTEXT_TRAFFIC_TOKEN: ${{ secrets.CONTEXT_TRAFFIC_TOKEN }}
+      CONTEXT_TRAFFIC_TOKEN: ${{ github.token }}
       METRICS_COMMIT_TOKEN: ${{ github.token }}
       GITHUB_REPOSITORY: ${{ github.repository }}
     steps:
-      - name: Require the traffic token
-        shell: bash
-        run: |
-          if [[ -z "$CONTEXT_TRAFFIC_TOKEN" ]]; then
-            echo "Add the CONTEXT_TRAFFIC_TOKEN repository secret before running this workflow."
-            exit 1
-          fi
-
       - name: Load the capture script without cloning the repository
         shell: bash
         env:
