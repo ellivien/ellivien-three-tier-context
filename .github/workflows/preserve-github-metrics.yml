@@ -1,0 +1,46 @@
+name: Preserve GitHub metrics
+
+on:
+  schedule:
+    - cron: "23 5 * * 1,4"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: preserve-github-metrics
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CONTEXT_TRAFFIC_TOKEN: ${{ secrets.CONTEXT_TRAFFIC_TOKEN }}
+      METRICS_COMMIT_TOKEN: ${{ github.token }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+    steps:
+      - name: Require the traffic token
+        shell: bash
+        run: |
+          if [[ -z "$CONTEXT_TRAFFIC_TOKEN" ]]; then
+            echo "Add the CONTEXT_TRAFFIC_TOKEN repository secret before running this workflow."
+            exit 1
+          fi
+
+      - name: Load the capture script without cloning the repository
+        shell: bash
+        env:
+          API_TOKEN: ${{ github.token }}
+        run: |
+          curl --fail --silent --show-error --location \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $API_TOKEN" \
+            --header "X-GitHub-Api-Version: 2026-03-10" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/contents/scripts/capture-github-metrics.mjs?ref=$GITHUB_SHA" \
+            | jq --raw-output '.content' \
+            | base64 --decode > "$RUNNER_TEMP/capture-github-metrics.mjs"
+
+      - name: Preserve the aggregate snapshot
+        run: node "$RUNNER_TEMP/capture-github-metrics.mjs" --commit

@@ -1,0 +1,24 @@
+{
+  "name": "ellivien-three-tier-context",
+  "version": "0.1.0",
+  "description": "Provider-neutral three-tier thread recall and rolling summaries for companion portals",
+  "license": "Apache-2.0",
+  "type": "commonjs",
+  "main": "src/index.cjs",
+  "files": [
+    "src/",
+    "examples/",
+    "README.md",
+    "SECURITY.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.cjs test/*.test.mjs",
+    "package:release": "node scripts/build-release.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
+
