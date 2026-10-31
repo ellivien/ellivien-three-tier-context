@@ -1,8 +1,9 @@
-# Ellivien Three-Tier Context
+# Ellivien Three-Tier Rolling Context Window
 
-A small, provider-neutral reference implementation for keeping a long companion
-thread usable without sending the entire conversation to the main model on
-every turn.
+The canonical open-source reference implementation of Ellivien's **Three-Tier
+Rolling Context Window**: a provider-neutral pattern for keeping a long
+companion thread usable without sending the entire conversation to the main
+model on every turn.
 
 It combines four deliberately separate pieces:
 

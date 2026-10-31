@@ -1,7 +1,7 @@
 {
   "name": "ellivien-three-tier-context",
   "version": "0.1.0",
-  "description": "Provider-neutral three-tier thread recall and rolling summaries for companion portals",
+  "description": "Provider-neutral Three-Tier Rolling Context Window for companion portals",
   "license": "Apache-2.0",
   "type": "commonjs",
   "main": "src/index.cjs",
