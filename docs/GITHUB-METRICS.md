@@ -19,10 +19,12 @@ Contents read permits release and asset download records while the repository
 is private. The workflow's separate short-lived `GITHUB_TOKEN` writes only the
 aggregate snapshot.
 
-The automatic Sunday 08:17 UTC schedule preserves overlapping copies of GitHub's 14-day
-views, visitors, clones, cloners, referrers and popular-path data. Each snapshot
-also records stars, forks and named release-asset download counts. It contains
-no visitor identities.
+Automatic Sunday preservation now lives in
+[`ellivien-open-source-evidence`](https://github.com/ellivien/ellivien-open-source-evidence),
+which discovers current and future public repositories account-wide. This
+repository-specific workflow remains available as a manual fallback. Snapshots
+record GitHub's rolling 14-day views, visitors, clones and cloners plus release
+downloads, without visitor identities.
 
 Each snapshot keeps per-asset counts and a `releasePackageDownloadTotal` that
 sums only named `.zip` packages. The separate `releaseAssetDownloadTotal`
