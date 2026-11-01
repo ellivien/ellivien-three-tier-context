@@ -19,7 +19,7 @@ Contents read permits release and asset download records while the repository
 is private. The workflow's separate short-lived `GITHUB_TOKEN` writes only the
 aggregate snapshot.
 
-The Monday/Thursday schedule preserves overlapping copies of GitHub's 14-day
+The automatic Sunday 08:17 UTC schedule preserves overlapping copies of GitHub's 14-day
 views, visitors, clones, cloners, referrers and popular-path data. Each snapshot
 also records stars, forks and named release-asset download counts. It contains
 no visitor identities.

@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-11-01T08:38:00.928Z",
+  "repository": "ellivien/ellivien-three-tier-context",
+  "source": {
+    "provider": "GitHub REST API",
+    "aggregateOnly": true,
+    "trafficWindowDays": 14,
+    "note": "GitHub traffic is a rolling 14-day window. Overlapping snapshots preserve the history without identifying visitors."
+  },
+  "repositoryTotals": {
+    "stars": 0,
+    "forks": 0,
+    "openIssuesAndPullRequests": 0
+  },
+  "traffic": {
+    "views": {
+      "count": 18,
+      "uniques": 12,
+      "views": [
+        {
+          "timestamp": "2026-10-18T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-19T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-20T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-21T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-22T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-23T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-24T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-25T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-26T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-27T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-28T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-29T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-30T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-31T00:00:00Z",
+          "count": 18,
+          "uniques": 12
+        }
+      ]
+    },
+    "clones": {
+      "count": 19,
+      "uniques": 15,
+      "clones": [
+        {
+          "timestamp": "2026-10-18T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-19T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-20T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-21T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-22T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-23T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-24T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-25T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-26T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-27T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-28T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-29T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-30T00:00:00Z",
+          "count": 0,
+          "uniques": 0
+        },
+        {
+          "timestamp": "2026-10-31T00:00:00Z",
+          "count": 19,
+          "uniques": 15
+        }
+      ]
+    },
+    "topReferrers": [
+      {
+        "referrer": "github.com",
+        "count": 6,
+        "uniques": 2
+      },
+      {
+        "referrer": "com.reddit.frontpage",
+        "count": 1,
+        "uniques": 1
+      },
+      {
+        "referrer": "reddit.com",
+        "count": 1,
+        "uniques": 1
+      }
+    ],
+    "popularPaths": [
+      {
+        "path": "/ellivien/ellivien-three-tier-context",
+        "title": "Overview",
+        "count": 18,
+        "uniques": 12
+      }
+    ]
+  },
+  "releases": [
+    {
+      "tagName": "v0.1.0",
+      "name": "Ellivien Three-Tier Context v0.1.0",
+      "draft": false,
+      "prerelease": false,
+      "publishedAt": "2026-10-31T07:26:07Z",
+      "url": "https://github.com/ellivien/ellivien-three-tier-context/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "name": "ellivien-three-tier-context-v0.1.0.zip",
+          "size": 24651,
+          "contentType": "application/zip",
+          "downloadCount": 2,
+          "updatedAt": "2026-10-31T07:26:06Z",
+          "downloadUrl": "https://github.com/ellivien/ellivien-three-tier-context/releases/download/v0.1.0/ellivien-three-tier-context-v0.1.0.zip"
+        },
+        {
+          "name": "ellivien-three-tier-context-v0.1.0.zip.sha256",
+          "size": 105,
+          "contentType": "application/octet-stream",
+          "downloadCount": 2,
+          "updatedAt": "2026-10-31T07:26:06Z",
+          "downloadUrl": "https://github.com/ellivien/ellivien-three-tier-context/releases/download/v0.1.0/ellivien-three-tier-context-v0.1.0.zip.sha256"
+        }
+      ]
+    }
+  ],
+  "releaseAssetDownloadTotal": 4,
+  "releasePackageDownloadTotal": 2
+}
